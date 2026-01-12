@@ -1,65 +1,128 @@
-import Image from "next/image";
+// Добавил JSON-LD структурированные данные
+
+// ============================================
+// ГЛАВНАЯ СТРАНИЦА ЛЕНДИНГА
+// ============================================
+// Все данные импортируются из lib/site-data.ts
+// Для кастомизации редактируйте данные там или передавайте через props
+
+import { Header } from "@/components/header";
+import { HeroSection } from "@/components/hero-section";
+import { ServicesSection } from "@/components/services-section";
+import { StatsSection } from "@/components/stats-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
+import { ContactSection } from "@/components/contact-section";
+import { Footer } from "@/components/footer";
+import {
+  OrganizationJsonLd,
+  ServicesJsonLd,
+  LocalBusinessJsonLd,
+  WebsiteJsonLd,
+  FAQJsonLd,
+} from "@/components/seo/json-ld";
+
+// TODO: FAQ данные для SEO (вопросы-ответы помогают в выдаче)
+const faqItems = [
+  {
+    question: "Сколько времени занимает керамическое покрытие?",
+    answer:
+      "Процесс нанесения керамического покрытия занимает от 2 до 3 дней, включая подготовку поверхности, полировку и нанесение нескольких слоёв покрытия.",
+  },
+  {
+    question: "Как долго держится керамическое покрытие?",
+    answer:
+      "Наше керамическое покрытие 9H держится от 3 до 5 лет при правильном уходе. Мы предоставляем гарантию и рекомендации по уходу.",
+  },
+  {
+    question: "Можно ли записаться онлайн?",
+    answer:
+      "Да, вы можете записаться онлайн 24/7 через форму на сайте или позвонить нам по телефону. Мы свяжемся с вами в течение 2 часов.",
+  },
+  {
+    question: "Какие марки автомобилей вы обслуживаете?",
+    answer:
+      "Мы специализируемся на премиальных и люксовых автомобилях всех марок: Porsche, BMW, Mercedes-Benz, Audi, Ferrari, Lamborghini и других.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      {/* JSON-LD Структурированные данные для SEO */}
+      <WebsiteJsonLd />
+      <OrganizationJsonLd />
+      <LocalBusinessJsonLd />
+      <ServicesJsonLd />
+      <FAQJsonLd items={faqItems} />
+
+      <main className="min-h-screen bg-[#020617]">
+        {/*
+          HEADER
+          - Навигация берётся из lib/site-data.ts -> navLinks
+          - Логотип из lib/site-data.ts -> siteConfig
+        */}
+        <Header />
+
+        {/*
+          HERO СЕКЦИЯ
+          Props:
+          - backgroundImage: string - путь к фоновому изображению
+          - onPrimaryClick: () => void - обработчик основной кнопки
+          - onSecondaryClick: () => void - обработчик вторичной кнопки
+
+          Данные берутся из lib/site-data.ts -> heroContent
+        */}
+        <HeroSection backgroundImage="/luxury-black-porsche-911-in-dark-dramatic-studio-li.jpg" />
+
+        {/*
+          УСЛУГИ
+          Props:
+          - customServices: Service[] - массив услуг из CMS
+          - title, subtitle, description: string - заголовки секции
+
+          Данные по умолчанию из lib/site-data.ts -> services
+        */}
+        <ServicesSection />
+
+        {/*
+          СТАТИСТИКА И ПРЕИМУЩЕСТВА
+          Props:
+          - customStats: Stat[] - массив статистики
+          - customFeatures: Feature[] - массив преимуществ
+
+          Данные по умолчанию из lib/site-data.ts -> stats, features
+        */}
+        <StatsSection />
+
+        {/*
+          ОТЗЫВЫ
+          Props:
+          - customTestimonials: Testimonial[] - массив отзывов из CMS
+          - title, subtitle: string - заголовки секции
+
+          Данные по умолчанию из lib/site-data.ts -> testimonials
+        */}
+        <TestimonialsSection />
+
+        {/*
+          КОНТАКТНАЯ ФОРМА
+          Props:
+          - onSubmit: (data: ContactFormData) => Promise<void> - обработчик формы
+          - title, subtitle, description: string - заголовки секции
+
+          Контактные данные из lib/site-data.ts -> contactInfo
+          Опции услуг из lib/site-data.ts -> serviceOptions
+        */}
+        <ContactSection />
+
+        {/*
+          FOOTER
+          - Ссылки из lib/site-data.ts -> footerLinks
+          - Соцсети из lib/site-data.ts -> socialLinks
+          - Копирайт из lib/site-data.ts -> siteConfig
+        */}
+        <Footer />
       </main>
-    </div>
+    </>
   );
 }
