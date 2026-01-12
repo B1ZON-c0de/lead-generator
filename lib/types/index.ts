@@ -85,8 +85,8 @@ export interface ServiceOption {
 // --- ФОРМА ЗАЯВКИ ---
 export interface ContactFormData {
   fullName: string;
-  email: string;
-  phone?: string;
+  email?: string;
+  phone: string;
   vehicleModel: string;
   serviceType: string;
   message?: string;

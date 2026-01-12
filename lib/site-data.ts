@@ -206,6 +206,7 @@ export const serviceOptions: ServiceOption[] = [
   { id: "interior", value: "interior", label: "Детейлинг Интерьера" },
   { id: "ceramic", value: "ceramic", label: "Керамическое Покрытие" },
   { id: "full", value: "full", label: "Полный Комплекс" },
+  { id: "other", value: "other", label: "Другое (укажите в сообщении)" },
 ];
 
 // --- FOOTER ССЫЛКИ ---

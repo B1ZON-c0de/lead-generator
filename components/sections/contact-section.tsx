@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import { contactInfo, serviceOptions } from "@/lib/site-data";
 import type { ContactFormData } from "@/lib/types";
 import { submitContactForm } from "@/lib/actions/actions";
+import { formatPhoneNumber } from "@/lib/uttils/format-phone-number";
 
 interface ContactSectionProps {
   // TODO: Передайте обработчик отправки формы
@@ -29,8 +30,8 @@ interface ContactSectionProps {
 
 export function ContactSection({
   onSubmit,
-  title = "Готовы Восстановить",
-  subtitle = "Ваш Автомобиль?",
+  title = "Готовы Сделать Ваш Автомобиль ",
+  subtitle = "Ещё Привлекательнее?",
   description = "Заполните форму для индивидуального расчёта или записи на ближайшее время. Наши специалисты свяжутся с вами в течение 2 рабочих часов.",
 }: ContactSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,7 +41,7 @@ export function ContactSection({
   // Состояние формы
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: "",
-    email: "",
+    phone: "",
     vehicleModel: "",
     serviceType: "",
     message: "",
@@ -69,14 +70,17 @@ export function ContactSection({
 
     try {
       if (onSubmit) {
-        await onSubmit(formData);
+        await onSubmit({
+          ...formData,
+          phone: formData.phone.replace(/[ ()-]/g, ""),
+        });
       } else {
         console.log("Form submitted");
       }
 
       setFormData({
         fullName: "",
-        email: "",
+        phone: "",
         vehicleModel: "",
         serviceType: "",
         message: "",
@@ -167,15 +171,18 @@ export function ContactSection({
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">
-                      Email
+                      Телефон
                     </label>
                     <Input
-                      type="email"
-                      placeholder="ivan@example.com"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      type="tel"
+                      placeholder="+7 (999) 999-99-99"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const formattedPhone = formatPhoneNumber(
+                          e.target.value,
+                        );
+                        setFormData({ ...formData, phone: formattedPhone });
+                      }}
                       className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                     />
                   </div>
