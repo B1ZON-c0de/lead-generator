@@ -211,9 +211,9 @@ export const serviceOptions: ServiceOption[] = [
 
 // --- FOOTER ССЫЛКИ ---
 export const footerLinks: FooterLink[] = [
-  { label: "Политика конфиденциальности", href: "/privacy" },
-  { label: "Условия использования", href: "/terms" },
-  { label: "Настройки cookie", href: "/cookies" },
+  { label: "Политика конфиденциальности", href: "/privacy-policy" },
+  { label: "Условия использования", href: "/terms-of-use" },
+  { label: "Настройки cookie", href: "/cookie-banner" },
 ];
 
 // --- СОЦИАЛЬНЫЕ СЕТИ ---

@@ -6,6 +6,7 @@ import { Play, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { heroContent } from "@/lib/site-data";
+import { useRouter } from "next/navigation";
 
 interface HeroSectionProps {
   backgroundImage?: string;
@@ -19,6 +20,8 @@ export function HeroSection({
   onSecondaryClick,
 }: HeroSectionProps) {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     setIsLoaded(true);
@@ -38,7 +41,7 @@ export function HeroSection({
     if (onSecondaryClick) {
       onSecondaryClick();
     } else {
-      console.log("Gallery button clicked");
+      router.push("/gallery");
     }
   };
 
