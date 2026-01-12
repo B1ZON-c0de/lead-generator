@@ -15,7 +15,6 @@ export const formatPhoneNumber = (value: string) => {
   if (body.length >= 4) result += `) ${body.slice(3, 6)}`;
   if (body.length >= 7) result += `-${body.slice(6, 8)}`;
   if (body.length >= 9) result += `-${body.slice(8, 10)}`;
-  console.log(result);
 
   return result;
 };

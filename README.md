@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 Cult Deatiling - Lead Generator
 
-## Getting Started
+Современный лендинг для студии детейлинга с премиальным дизайном, анимациями и автоматизированной системой сбора заявок.
 
-First, run the development server:
+Сайт построен на **Next.js (App Router)** и полностью оптимизирован для SEO и мобильных устройств.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ⚡️ Основные возможности
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🎨 Frontend & UI
+* **Стек:** Next.js 15, React, TypeScript, Tailwind CSS.
+* **Компоненты:** Shadcn/UI (Radix UI).
+* **Анимации:** Framer Motion (плавные появления, галерея).
+* **Галерея:** Раскладка Masonry (как в Pinterest) + Lightbox (просмотр фото на весь экран).
+* **Тема:** Dark Mode (неоновая стилистика).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ⚙️ Backend & Integrations
+При отправке формы заявки происходят параллельно следующие действия:
+1.  **Telegram:**
+    * Менеджеру приходит текстовое уведомление с деталями заявки.
+    * Следом приходит нативная **Карточка контакта** (кнопка "Позвонить" / "Добавить контакт").
+2.  **Airtable (CRM):**
+    * Заявка автоматически сохраняется в таблицу.
+    * Поддерживается `typecast` (умное приведение типов данных).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ⚖️ Юридическая защита
+* Готовые страницы: Политика конфиденциальности, Условия использования, Cookie Policy.
+* Баннер уведомления о Cookies.
 
-## Learn More
+### 🔍 SEO
+* Автоматическая генерация `sitemap.xml` и `robots.txt`.
+* Микроразметка **JSON-LD** (Schema.org) для локального бизнеса.
+* Семантическая верстка.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
