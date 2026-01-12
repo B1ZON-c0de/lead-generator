@@ -1,19 +1,16 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Play, ChevronDown } from "lucide-react"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Play, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { heroContent } from "@/lib/site-data"
+import { heroContent } from "@/lib/site-data";
 
-// Props интерфейс для кастомизации
 interface HeroSectionProps {
-  // TODO: Замените на путь к вашему изображению
-  backgroundImage?: string
-  // TODO: Добавьте обработчики кнопок
-  onPrimaryClick?: () => void
-  onSecondaryClick?: () => void
+  backgroundImage?: string;
+  onPrimaryClick?: () => void;
+  onSecondaryClick?: () => void;
 }
 
 export function HeroSection({
@@ -21,35 +18,32 @@ export function HeroSection({
   onPrimaryClick,
   onSecondaryClick,
 }: HeroSectionProps) {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+    setIsLoaded(true);
+  }, []);
 
-  // Обработчик основной кнопки
   const handlePrimaryClick = () => {
     if (onPrimaryClick) {
-      onPrimaryClick()
+      onPrimaryClick();
     } else {
-      // По умолчанию скролл к форме
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+      document
+        .getElementById("contact")
+        ?.scrollIntoView({ behavior: "smooth" });
     }
-  }
+  };
 
-  // Обработчик вторичной кнопки
   const handleSecondaryClick = () => {
     if (onSecondaryClick) {
-      onSecondaryClick()
+      onSecondaryClick();
     } else {
-      // TODO: Добавьте свою логику (открытие галереи, видео и т.д.)
-      console.log("Gallery button clicked")
+      console.log("Gallery button clicked");
     }
-  }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image - TODO: Замените путь к изображению */}
       <div className="absolute inset-0">
         <Image
           src={backgroundImage || "/placeholder.svg"}
@@ -125,13 +119,15 @@ export function HeroSection({
               className="bg-gradient-to-r from-[#1e88e5] to-[#0ea5e9] hover:from-[#1976d2] hover:to-[#0284c7] text-white rounded-full px-8 py-6 text-base shadow-xl shadow-[#1e88e5]/30 hover:shadow-[#1e88e5]/50 transition-all duration-300 hover:scale-105 group"
             >
               {heroContent.primaryButtonText}
-              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">
+                →
+              </span>
             </Button>
             <Button
               size="lg"
               variant="outline"
               onClick={handleSecondaryClick}
-              className="border-[#1e293b] hover:border-[#60a5fa]/50 text-white hover:bg-white/5 rounded-full px-8 py-6 text-base bg-transparent backdrop-blur-sm transition-all duration-300 group"
+              className="border-[#1e293b] hover:border-[#60a5fa]/50 text-white hover:bg-white/5 hover:text-white  rounded-full px-8 py-6 text-base bg-transparent backdrop-blur-sm transition-all duration-300 group"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               {heroContent.secondaryButtonText}
@@ -143,9 +139,16 @@ export function HeroSection({
             className={`grid grid-cols-3 gap-4 sm:gap-8 mt-12 md:mt-16 pt-8 md:pt-12 border-t border-[#1e293b]/50 transition-all duration-700 delay-500 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           >
             {heroContent.stats.map((stat, index) => (
-              <div key={stat.label} className={`text-center sm:text-left stagger-${index + 1}`}>
-                <p className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text">{stat.value}</p>
-                <p className="text-xs sm:text-sm text-[#94a3b8] mt-1">{stat.label}</p>
+              <div
+                key={stat.label}
+                className={`text-center sm:text-left stagger-${index + 1}`}
+              >
+                <p className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text">
+                  {stat.value}
+                </p>
+                <p className="text-xs sm:text-sm text-[#94a3b8] mt-1">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
@@ -160,5 +163,5 @@ export function HeroSection({
       {/* Bottom gradient for transition */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent z-[5]" />
     </section>
-  )
+  );
 }

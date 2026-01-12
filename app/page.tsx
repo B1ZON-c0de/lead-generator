@@ -12,6 +12,7 @@ import {
   WebsiteJsonLd,
   FAQJsonLd,
 } from "@/components/seo/json-ld";
+import { submitContactForm } from "@/lib/actions/actions";
 
 // TODO: FAQ данные для SEO (вопросы-ответы помогают в выдаче)
 const faqItems = [
@@ -105,7 +106,7 @@ export default function Home() {
           Контактные данные из lib/site-data.ts -> contactInfo
           Опции услуг из lib/site-data.ts -> serviceOptions
         */}
-        <ContactSection />
+        <ContactSection onSubmit={submitContactForm} />
 
         {/*
           FOOTER

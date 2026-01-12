@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { Star, Quote } from "lucide-react"
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { Star, Quote } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
-import { testimonials } from "@/lib/site-data"
-import type { Testimonial } from "@/types"
+import { testimonials } from "@/lib/site-data";
+import type { Testimonial } from "@/lib/types";
 
 interface TestimonialsSectionProps {
   // TODO: Передайте данные из CMS или API
-  customTestimonials?: Testimonial[]
-  title?: string
-  subtitle?: string
+  customTestimonials?: Testimonial[];
+  title?: string;
+  subtitle?: string;
 }
 
 export function TestimonialsSection({
@@ -19,28 +19,28 @@ export function TestimonialsSection({
   title = "Нам Доверяют",
   subtitle = "Владельцы Премиум Авто",
 }: TestimonialsSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Используем переданные данные или дефолтные
-  const displayTestimonials = customTestimonials || testimonials
+  const displayTestimonials = customTestimonials || testimonials;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="reviews" ref={sectionRef} className="relative overflow-hidden">
@@ -68,7 +68,9 @@ export function TestimonialsSection({
               <div
                 key={testimonial.id}
                 className={`group relative bg-gradient-to-br from-[#0f172a] to-[#0a1628] backdrop-blur-sm border border-[#1e293b]/50 rounded-3xl p-6 lg:p-8 hover:border-[#60a5fa]/40 transition-all duration-700 ease-out hover:-translate-y-3 hover:shadow-2xl hover:shadow-[#1e88e5]/20 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-16"
                 }`}
                 style={{ transitionDelay: `${index * 200 + 200}ms` }}
               >
@@ -83,7 +85,9 @@ export function TestimonialsSection({
                     <Star
                       key={i}
                       className={`w-4 h-4 transition-all duration-300 ${
-                        i < testimonial.rating ? "fill-[#60a5fa] text-[#60a5fa]" : "fill-transparent text-[#1e293b]"
+                        i < testimonial.rating
+                          ? "fill-[#60a5fa] text-[#60a5fa]"
+                          : "fill-transparent text-[#1e293b]"
                       }`}
                       style={{ transitionDelay: `${i * 50}ms` }}
                     />
@@ -110,7 +114,9 @@ export function TestimonialsSection({
                     ) : (
                       // Иначе показываем инициалы
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1e88e5] to-[#60a5fa] flex items-center justify-center ring-2 ring-[#1e293b] group-hover:ring-[#60a5fa]/50 transition-all duration-500 group-hover:scale-110">
-                        <span className="text-white font-semibold text-sm">{testimonial.initials}</span>
+                        <span className="text-white font-semibold text-sm">
+                          {testimonial.initials}
+                        </span>
                       </div>
                     )}
                     <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-r from-[#22d3ee] to-[#1e88e5] rounded-full border-2 border-[#0f172a] group-hover:scale-125 transition-transform duration-500" />
@@ -119,7 +125,9 @@ export function TestimonialsSection({
                     <p className="font-semibold text-white group-hover:text-[#60a5fa] transition-colors duration-500">
                       {testimonial.author}
                     </p>
-                    <p className="text-sm text-[#60a5fa]/80">{testimonial.role}</p>
+                    <p className="text-sm text-[#60a5fa]/80">
+                      {testimonial.role}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -130,5 +138,5 @@ export function TestimonialsSection({
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10" />
     </section>
-  )
+  );
 }

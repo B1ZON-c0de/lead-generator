@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { CheckCircle } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { CheckCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-import { stats, features } from "@/lib/site-data"
-import type { Stat, Feature } from "@/types"
+import { stats, features } from "@/lib/site-data";
+import type { Stat, Feature } from "@/lib/types";
 
 interface StatsSectionProps {
   // TODO: Передайте данные из CMS или API
-  customStats?: Stat[]
-  customFeatures?: Feature[]
-  title?: string
-  subtitle?: string
-  description?: string
+  customStats?: Stat[];
+  customFeatures?: Feature[];
+  title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
 export function StatsSection({
@@ -22,29 +22,29 @@ export function StatsSection({
   subtitle = "Премиум Уходе",
   description = "Мы относимся к каждому автомобилю как к произведению искусства. Наша студия оснащена специальным освещением, климат-контролем и новейшими технологиями для безупречного результата каждый раз.",
 }: StatsSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Используем переданные данные или дефолтные
-  const displayStats = customStats || stats
-  const displayFeatures = customFeatures || features
+  const displayStats = customStats || stats;
+  const displayFeatures = customFeatures || features;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="why-us" ref={sectionRef} className="relative overflow-hidden">
@@ -62,7 +62,9 @@ export function StatsSection({
                 <div
                   key={stat.id}
                   className={`group relative bg-gradient-to-br from-[#0f172a] to-[#020617] border border-[#1e293b]/50 rounded-3xl p-6 md:p-8 text-center hover:border-[#60a5fa]/40 transition-all duration-700 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#1e88e5]/15 ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+                    isVisible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-16"
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
@@ -72,8 +74,12 @@ export function StatsSection({
                   >
                     <stat.icon className="w-6 h-6 text-white" />
                   </div>
-                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">{stat.value}</p>
-                  <p className="text-xs md:text-sm text-[#94a3b8] uppercase tracking-wide">{stat.label}</p>
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-2">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs md:text-sm text-[#94a3b8] uppercase tracking-wide">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -85,14 +91,19 @@ export function StatsSection({
             >
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass">
                 <span className="w-2 h-2 rounded-full bg-[#22d3ee] animate-pulse" />
-                <span className="text-[#60a5fa] text-sm font-medium tracking-widest uppercase">Почему Elite</span>
+                <span className="text-[#60a5fa] text-sm font-medium tracking-widest uppercase">
+                  Почему Elite
+                </span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight text-balance">
-                {title} <span className="gradient-text">{subtitle}</span> за Авто
+                {title} <span className="gradient-text">{subtitle}</span> за
+                Авто
               </h2>
 
-              <p className="text-[#94a3b8] leading-relaxed text-base md:text-lg">{description}</p>
+              <p className="text-[#94a3b8] leading-relaxed text-base md:text-lg">
+                {description}
+              </p>
 
               {/* Features - данные из displayFeatures */}
               <div className="space-y-5 pt-4">
@@ -100,7 +111,9 @@ export function StatsSection({
                   <div
                     key={feature.id}
                     className={`flex gap-4 p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#020617]/50 border border-[#1e293b]/50 hover:border-[#60a5fa]/40 transition-all duration-500 group ${
-                      isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
+                      isVisible
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-12"
                     }`}
                     style={{ transitionDelay: `${500 + index * 150}ms` }}
                   >
@@ -125,5 +138,5 @@ export function StatsSection({
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0f1a] to-transparent z-10 pointer-events-none" />
     </section>
-  )
+  );
 }

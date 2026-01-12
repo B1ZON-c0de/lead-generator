@@ -1,18 +1,16 @@
-"use client"
+"use client";
 
-import { Sparkles } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-import { services } from "@/lib/site-data"
-import type { Service } from "@/types"
+import { services } from "@/lib/site-data";
+import type { Service } from "@/lib/types";
 
-// Props для кастомизации секции
 interface ServicesSectionProps {
-  // TODO: Передайте данные из CMS или API
-  customServices?: Service[]
-  title?: string
-  subtitle?: string
-  description?: string
+  customServices?: Service[];
+  title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
 export function ServicesSection({
@@ -21,31 +19,35 @@ export function ServicesSection({
   subtitle = "за Вашим Автомобилем",
   description = "От регулярной мойки до полного восстановления шоурумного состояния — мы используем только лучшие pH-нейтральные продукты.",
 }: ServicesSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Используем переданные данные или дефолтные из lib/site-data
-  const displayServices = customServices || services
+  const displayServices = customServices || services;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="relative overflow-hidden">
+    <section
+      id="services"
+      ref={sectionRef}
+      className="relative overflow-hidden"
+    >
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#020617] to-transparent z-10 pointer-events-none" />
 
       <div className="py-24 md:py-36 bg-gradient-to-b from-[#020617] via-[#0a0f1a] to-[#0f172a]">
@@ -59,13 +61,17 @@ export function ServicesSection({
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4">
               <Sparkles className="w-4 h-4 text-[#60a5fa]" />
-              <span className="text-[#60a5fa] text-sm font-medium tracking-widest uppercase">Наши Услуги</span>
+              <span className="text-[#60a5fa] text-sm font-medium tracking-widest uppercase">
+                Наши Услуги
+              </span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 text-balance">
               {title} <br className="hidden sm:block" />
               <span className="gradient-text">{subtitle}</span>
             </h2>
-            <p className="text-[#94a3b8] max-w-2xl mx-auto text-base md:text-lg">{description}</p>
+            <p className="text-[#94a3b8] max-w-2xl mx-auto text-base md:text-lg">
+              {description}
+            </p>
           </div>
 
           {/* Services Grid - данные из displayServices */}
@@ -74,7 +80,9 @@ export function ServicesSection({
               <div
                 key={service.id}
                 className={`group relative bg-gradient-to-br from-[#0f172a] to-[#0a1628] backdrop-blur-sm border border-[#1e293b]/50 rounded-3xl p-6 lg:p-8 hover:border-[#60a5fa]/40 transition-all duration-700 ease-out hover:-translate-y-3 ${service.shadowColor} hover:shadow-2xl ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-16"
                 }`}
                 style={{ transitionDelay: `${index * 200 + 200}ms` }}
               >
@@ -102,7 +110,9 @@ export function ServicesSection({
                         key={feature}
                         className="flex items-center gap-3 text-sm text-[#94a3b8] group-hover:text-white transition-colors duration-500"
                       >
-                        <span className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.colorGradient}`} />
+                        <span
+                          className={`w-2 h-2 rounded-full bg-gradient-to-r ${service.colorGradient}`}
+                        />
                         {feature}
                       </li>
                     ))}
@@ -116,5 +126,5 @@ export function ServicesSection({
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0f172a] to-transparent z-10 pointer-events-none" />
     </section>
-  )
+  );
 }

@@ -1,23 +1,30 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Send } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useEffect, useRef, useState } from "react"
+import { Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useEffect, useRef, useState } from "react";
 
-import { contactInfo, serviceOptions } from "@/lib/site-data"
-import type { ContactFormData } from "@/types"
+import { contactInfo, serviceOptions } from "@/lib/site-data";
+import type { ContactFormData } from "@/lib/types";
+import { submitContactForm } from "@/lib/actions/actions";
 
 interface ContactSectionProps {
   // TODO: Передайте обработчик отправки формы
-  onSubmit?: (data: ContactFormData) => Promise<void>
-  title?: string
-  subtitle?: string
-  description?: string
+  onSubmit?: (data: ContactFormData) => Promise<void>;
+  title?: string;
+  subtitle?: string;
+  description?: string;
 }
 
 export function ContactSection({
@@ -26,9 +33,9 @@ export function ContactSection({
   subtitle = "Ваш Автомобиль?",
   description = "Заполните форму для индивидуального расчёта или записи на ближайшее время. Наши специалисты свяжутся с вами в течение 2 рабочих часов.",
 }: ContactSectionProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Состояние формы
   const [formData, setFormData] = useState<ContactFormData>({
@@ -37,63 +44,50 @@ export function ContactSection({
     vehicleModel: "",
     serviceType: "",
     message: "",
-  })
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
       { threshold: 0.1 },
-    )
+    );
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
-  // TODO: Добавьте свою логику отправки формы
-  // Например: отправка на API, в Telegram, email и т.д.
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       if (onSubmit) {
-        await onSubmit(formData)
+        await onSubmit(formData);
       } else {
-        // Дефолтная логика - замените на свою
-        console.log("Form submitted:", formData)
-        // TODO: Добавьте отправку данных на сервер
-        // await fetch('/api/contact', {
-        //   method: 'POST',
-        //   body: JSON.stringify(formData),
-        // })
+        console.log("Form submitted");
       }
 
-      // Очистка формы после успешной отправки
       setFormData({
         fullName: "",
         email: "",
         vehicleModel: "",
         serviceType: "",
         message: "",
-      })
-
-      // TODO: Покажите уведомление об успехе
-      alert("Заявка отправлена! Мы свяжемся с вами в ближайшее время.")
+      });
     } catch (error) {
-      // TODO: Обработка ошибки
-      console.error("Error submitting form:", error)
-      alert("Ошибка отправки. Попробуйте ещё раз.")
+      console.error("Error submitting form:", error);
+      alert("Ошибка отправки. Попробуйте ещё раз.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <section id="contact" ref={sectionRef} className="relative overflow-hidden">
@@ -117,7 +111,9 @@ export function ContactSection({
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight text-balance">
                   {title} <span className="gradient-text">{subtitle}</span>
                 </h2>
-                <p className="text-[#94a3b8] leading-relaxed text-base md:text-lg">{description}</p>
+                <p className="text-[#94a3b8] leading-relaxed text-base md:text-lg">
+                  {description}
+                </p>
               </div>
 
               {/* Contact info cards - данные из contactInfo */}
@@ -127,7 +123,9 @@ export function ContactSection({
                     key={item.id}
                     href={item.href}
                     className={`flex items-center gap-4 p-5 rounded-2xl bg-gradient-to-br from-[#0f172a]/80 to-[#020617]/50 border border-[#1e293b]/50 hover:border-[#60a5fa]/40 transition-all duration-500 group ${
-                      isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
+                      isVisible
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-12"
                     } ${item.href ? "cursor-pointer" : "cursor-default"}`}
                     style={{ transitionDelay: `${300 + index * 150}ms` }}
                   >
@@ -135,7 +133,9 @@ export function ContactSection({
                       <item.icon className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <p className="text-xs text-[#94a3b8] uppercase tracking-wide">{item.label}</p>
+                      <p className="text-xs text-[#94a3b8] uppercase tracking-wide">
+                        {item.label}
+                      </p>
                       <p className="text-white font-medium group-hover:text-[#60a5fa] transition-colors duration-500">
                         {item.value}
                       </p>
@@ -153,22 +153,30 @@ export function ContactSection({
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">Ваше Имя</label>
+                    <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">
+                      Ваше Имя
+                    </label>
                     <Input
                       placeholder="Иван Иванов"
                       value={formData.fullName}
-                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, fullName: e.target.value })
+                      }
                       required
                       className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">Email</label>
+                    <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">
+                      Email
+                    </label>
                     <Input
                       type="email"
                       placeholder="ivan@example.com"
                       value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
                       required
                       className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                     />
@@ -182,7 +190,9 @@ export function ContactSection({
                   <Input
                     placeholder="напр. 2024 Tesla Model S"
                     value={formData.vehicleModel}
-                    onChange={(e) => setFormData({ ...formData, vehicleModel: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, vehicleModel: e.target.value })
+                    }
                     required
                     className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                   />
@@ -195,7 +205,9 @@ export function ContactSection({
                   {/* Выбор услуги - данные из serviceOptions */}
                   <Select
                     value={formData.serviceType}
-                    onValueChange={(value) => setFormData({ ...formData, serviceType: value })}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, serviceType: value })
+                    }
                   >
                     <SelectTrigger className="bg-[#020617]/80 border-[#1e293b] text-white focus:border-[#1e88e5] h-12 rounded-xl">
                       <SelectValue placeholder="Выберите услугу" />
@@ -218,7 +230,9 @@ export function ContactSection({
                     placeholder="Расскажите о специфических пожеланиях..."
                     rows={4}
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] resize-none rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                   />
                 </div>
@@ -240,5 +254,5 @@ export function ContactSection({
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#020617] to-transparent z-10 pointer-events-none" />
     </section>
-  )
+  );
 }

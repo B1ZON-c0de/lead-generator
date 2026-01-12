@@ -6,6 +6,7 @@ import { Menu, X, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { navLinks, siteConfig } from "@/lib/site-data";
+import Image from "next/image";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,8 +20,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // TODO: Добавьте обработчик клика на кнопку "Записаться"
-  // Например: открытие модального окна или переход к форме
   const handleBookingClick = () => {
     const contactSection = document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
@@ -38,8 +37,8 @@ export function Header() {
         <div className="flex h-12 md:h-14 items-center justify-between">
           {/* Logo - используем данные из siteConfig */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-[#1e88e5] to-[#22d3ee] group-hover:animate-glow transition-all duration-300">
-              <Droplets className="w-4 h-4 md:w-5 md:h-5 text-white" />
+            <div className="relative flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-linear-to-br from-[#1e88e5] to-[#22d3ee] group-hover:animate-glow transition-all duration-300">
+              <Image src={"/icon.svg"} alt="Logo" width={32} height={32} />
               <span className="absolute inset-0 rounded-full bg-[#1e88e5] animate-pulse-ring" />
             </div>
             <span className="text-lg md:text-xl font-bold text-white">
@@ -59,7 +58,7 @@ export function Header() {
                 className="relative text-sm font-medium text-[#94a3b8] transition-colors hover:text-white group"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#1e88e5] to-[#22d3ee] transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-[#1e88e5] to-[#22d3ee] transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </nav>
@@ -67,7 +66,7 @@ export function Header() {
           {/* CTA Button */}
           <Button
             onClick={handleBookingClick}
-            className="hidden lg:inline-flex bg-gradient-to-r from-[#1e88e5] to-[#0ea5e9] hover:from-[#1976d2] hover:to-[#0284c7] text-white rounded-full px-6 shadow-lg shadow-[#1e88e5]/25 hover:shadow-[#1e88e5]/40 transition-all duration-300 hover:scale-105"
+            className="hidden lg:inline-flex bg-linear-to-r from-[#1e88e5] to-[#0ea5e9] hover:from-[#1976d2] hover:to-[#0284c7] text-white rounded-full px-6 shadow-lg shadow-[#1e88e5]/25 hover:shadow-[#1e88e5]/40 transition-all duration-300 hover:scale-105"
           >
             Записаться
           </Button>
@@ -109,7 +108,7 @@ export function Header() {
           ))}
           <Button
             onClick={handleBookingClick}
-            className="mt-4 bg-gradient-to-r from-[#1e88e5] to-[#0ea5e9] text-white rounded-full w-full"
+            className="mt-4 bg-linear-to-r from-[#1e88e5] to-[#0ea5e9] text-white rounded-full w-full"
           >
             Записаться
           </Button>
