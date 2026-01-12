@@ -27,11 +27,10 @@ export const seoConfig = {
   ],
 
   // --- ЛОКАЦИЯ ---
-  // TODO: Обновите для вашего региона
   locale: "ru_RU",
   language: "ru",
   region: "RU",
-  city: "Москва",
+  city: "Новосибирск",
 
   // --- КОНТАКТЫ ДЛЯ SEO ---
   // TODO: Замените на реальные контакты
@@ -40,10 +39,10 @@ export const seoConfig = {
     phoneFormatted: "+78001234567",
     email: "info@elite-carwash.ru",
     address: {
-      street: "ул. Премиум Детейлинг, 123",
-      city: "Москва",
-      region: "Московская область",
-      postalCode: "123456",
+      street: "ул. Гоголя, 38",
+      city: "Новосибирск",
+      region: "Новосибирская область",
+      postalCode: "630005",
       country: "RU",
     },
   },
