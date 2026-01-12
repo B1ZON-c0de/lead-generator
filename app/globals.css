@@ -6,7 +6,7 @@
   --font-sans: "Inter", "Inter Fallback", sans-serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
 
-  /* Цвета: Связываем утилиты Tailwind с вашими CSS переменными */
+  /* Цвета Tailwind связанные с вашими CSS переменными */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,7 +42,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Графики (Charts) */
+  /* Графики  */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -168,10 +168,9 @@
   }
 }
 
-/* 2. Кастомный вариант для темной темы */
 @custom-variant dark (&:is(.dark *));
 
-/* 3. Определение переменных (CSS Variables) */
+/* CSS переменные */
 :root {
   --background: #020617;
   --foreground: #ffffff;
@@ -197,7 +196,7 @@
   --purple: #a855f7;
   --section-dark: #0a0f1a;
 
-  /* Sidebar Light (Defaults) */
+  /* Сайдбар */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -207,7 +206,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Chart Defaults (Empty placeholders to avoid errors if light mode uses them) */
+  /* Графики по умолчанию */
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -250,7 +249,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-/* 4. Базовые стили */
+/* Базовые стили */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -260,7 +259,7 @@
   }
 }
 
-/* 5. Утилиты (кастомные классы) */
+/*  Утилиты  */
 @layer utilities {
   /* Задержки анимации */
   .stagger-1 {
@@ -279,7 +278,7 @@
     animation-delay: 0.5s;
   }
 
-  /* Gradient text */
+  /* Градиентный текст */
   .gradient-text {
     background: linear-gradient(
       135deg,
@@ -292,14 +291,14 @@
     background-clip: text;
   }
 
-  /* Glass effect */
+  /* Эффект стекла */
   .glass {
     background: rgba(15, 23, 42, 0.7);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(96, 165, 250, 0.1);
   }
 
-  /* Shimmer specific override styles needed beyond keyframes */
+  /* Эффект блеска */
   .animate-shimmer {
     background: linear-gradient(
       90deg,
@@ -314,7 +313,7 @@
     background-size: 200% 200%;
   }
 
-  /* Section Transition */
+  /* Эффект перехода секции */
   .section-transition {
     position: relative;
   }

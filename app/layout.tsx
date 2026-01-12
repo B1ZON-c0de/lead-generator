@@ -115,7 +115,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={seoConfig.language}>
-      <body className={`font-sans antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         {children}
         <Analytics />
       </body>

@@ -1,35 +1,37 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X, Droplets } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Droplets } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-import { navLinks, siteConfig } from "@/lib/site-data"
+import { navLinks, siteConfig } from "@/lib/site-data";
 
 export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // TODO: Добавьте обработчик клика на кнопку "Записаться"
   // Например: открытие модального окна или переход к форме
   const handleBookingClick = () => {
-    const contactSection = document.getElementById("contact")
-    contactSection?.scrollIntoView({ behavior: "smooth" })
-  }
+    const contactSection = document.getElementById("contact");
+    contactSection?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-[#020617]/95 backdrop-blur-md border-b border-[#1e293b] py-2" : "bg-transparent py-4"
+        isScrolled
+          ? "bg-[#020617]/95 backdrop-blur-md border-b border-[#1e293b] py-2"
+          : "bg-transparent py-4"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -42,7 +44,9 @@ export function Header() {
             </div>
             <span className="text-lg md:text-xl font-bold text-white">
               {siteConfig.logoText}
-              <span className="font-normal text-[#60a5fa]">{siteConfig.logoHighlight}</span>
+              <span className="font-normal text-[#60a5fa]">
+                {siteConfig.logoHighlight}
+              </span>
             </span>
           </Link>
 
@@ -74,7 +78,11 @@ export function Header() {
             className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
             aria-label={isMenuOpen ? "Закрыть меню" : "Открыть меню"}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>
@@ -108,5 +116,5 @@ export function Header() {
         </nav>
       </div>
     </header>
-  )
+  );
 }

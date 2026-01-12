@@ -1,16 +1,10 @@
-// ============================================
-// JSON-LD СТРУКТУРИРОВАННЫЕ ДАННЫЕ
-// ============================================
-// Добавляет Schema.org разметку для поисковых систем
-// TODO: Обновите данные в lib/seo-config.ts
-
-import { seoConfig, servicesSchema } from "@/lib/seo-config"
+import { seoConfig, servicesSchema } from "@/lib/seo-config";
 
 // --- ОРГАНИЗАЦИЯ ---
 export function OrganizationJsonLd() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "AutoRepair", // Тип бизнеса для детейлинга
+    "@type": "AutoRepair",
     "@id": `${seoConfig.siteUrl}/#organization`,
     name: seoConfig.siteName,
     description: seoConfig.description,
@@ -30,11 +24,11 @@ export function OrganizationJsonLd() {
       addressCountry: seoConfig.contact.address.country,
     },
 
-    // Геолокация (TODO: добавьте реальные координаты)
+    // Геолокация
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 55.7558, // Москва, замените на реальные
-      longitude: 37.6173,
+      latitude: 55.0415,
+      longitude: 82.9346,
     },
 
     // Рабочие часы
@@ -73,18 +67,25 @@ export function OrganizationJsonLd() {
 
     // Социальные сети
     sameAs: [
-      seoConfig.social.instagram && `https://instagram.com/${seoConfig.social.instagram}`,
+      seoConfig.social.instagram &&
+        `https://instagram.com/${seoConfig.social.instagram}`,
       seoConfig.social.vk && `https://vk.com/${seoConfig.social.vk}`,
       seoConfig.social.telegram && `https://t.me/${seoConfig.social.telegram}`,
-      seoConfig.social.youtube && `https://youtube.com/${seoConfig.social.youtube}`,
+      seoConfig.social.youtube &&
+        `https://youtube.com/${seoConfig.social.youtube}`,
     ].filter(Boolean),
 
     // Способы оплаты
     paymentAccepted: ["Cash", "Credit Card", "Bank Transfer"],
     currenciesAccepted: "RUB",
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 // --- УСЛУГИ ---
@@ -120,15 +121,20 @@ export function ServicesJsonLd() {
         }),
       },
     })),
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 // --- ХЛЕБНЫЕ КРОШКИ ---
 interface BreadcrumbItem {
-  name: string
-  url: string
+  name: string;
+  url: string;
 }
 
 export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
@@ -141,15 +147,20 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
       name: item.name,
       item: `${seoConfig.siteUrl}${item.url}`,
     })),
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 // --- FAQ ---
 interface FAQItem {
-  question: string
-  answer: string
+  question: string;
+  answer: string;
 }
 
 export function FAQJsonLd({ items }: { items: FAQItem[] }) {
@@ -164,9 +175,14 @@ export function FAQJsonLd({ items }: { items: FAQItem[] }) {
         text: item.answer,
       },
     })),
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 // --- ЛОКАЛЬНЫЙ БИЗНЕС ---
@@ -207,12 +223,17 @@ export function LocalBusinessJsonLd() {
       ratingValue: seoConfig.rating.value,
       reviewCount: seoConfig.rating.count,
     },
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
-// --- ВЕБ-САЙТ (для поиска по сайту) ---
+// --- ВЕБ-САЙТ ---
 export function WebsiteJsonLd() {
   const schema = {
     "@context": "https://schema.org",
@@ -225,13 +246,12 @@ export function WebsiteJsonLd() {
       "@id": `${seoConfig.siteUrl}/#organization`,
     },
     inLanguage: seoConfig.locale,
-    // Поиск по сайту (если есть)
-    // potentialAction: {
-    //   "@type": "SearchAction",
-    //   target: `${seoConfig.siteUrl}/search?q={search_term_string}`,
-    //   "query-input": "required name=search_term_string",
-    // },
-  }
+  };
 
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }

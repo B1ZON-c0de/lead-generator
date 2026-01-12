@@ -1,18 +1,10 @@
-// Добавил JSON-LD структурированные данные
-
-// ============================================
-// ГЛАВНАЯ СТРАНИЦА ЛЕНДИНГА
-// ============================================
-// Все данные импортируются из lib/site-data.ts
-// Для кастомизации редактируйте данные там или передавайте через props
-
-import { Header } from "@/components/header";
-import { HeroSection } from "@/components/hero-section";
-import { ServicesSection } from "@/components/services-section";
-import { StatsSection } from "@/components/stats-section";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { ContactSection } from "@/components/contact-section";
-import { Footer } from "@/components/footer";
+import { Header } from "@/components/base/header";
+import { HeroSection } from "@/components/sections/hero-section";
+import { ServicesSection } from "@/components/sections/services-section";
+import { StatsSection } from "@/components/sections/stats-section";
+import { TestimonialsSection } from "@/components/sections/testimonials-section";
+import { ContactSection } from "@/components/sections/contact-section";
+import { Footer } from "@/components/base/footer";
 import {
   OrganizationJsonLd,
   ServicesJsonLd,
@@ -48,14 +40,14 @@ const faqItems = [
 export default function Home() {
   return (
     <>
-      {/* JSON-LD Структурированные данные для SEO */}
+      {/* JSON-LD для SEO */}
       <WebsiteJsonLd />
       <OrganizationJsonLd />
       <LocalBusinessJsonLd />
       <ServicesJsonLd />
       <FAQJsonLd items={faqItems} />
 
-      <main className="min-h-screen bg-[#020617]">
+      <main className="min-h-screen bg-background">
         {/*
           HEADER
           - Навигация берётся из lib/site-data.ts -> navLinks
