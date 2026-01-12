@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { seoConfig } from "@/lib/seo-config";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
@@ -117,6 +118,7 @@ export default function RootLayout({
     <html lang={seoConfig.language}>
       <body className={`${inter.className} antialiased`}>
         {children}
+        <Toaster position="top-right" />
         <Analytics />
       </body>
     </html>

@@ -19,6 +19,7 @@ import { contactInfo, serviceOptions } from "@/lib/site-data";
 import type { ContactFormData } from "@/lib/types";
 import { submitContactForm } from "@/lib/actions/actions";
 import { formatPhoneNumber } from "@/lib/uttils/format-phone-number";
+import { toast } from "sonner";
 
 interface ContactSectionProps {
   // TODO: Передайте обработчик отправки формы
@@ -73,7 +74,7 @@ export function ContactSection({
         await onSubmit({
           ...formData,
           phone: formData.phone.replace(/[ ()-]/g, ""),
-        });
+        }).then(() => toast.success("Сообщение отправлено"));
       } else {
         console.log("Form submitted");
       }
