@@ -1,7 +1,8 @@
-import Link from "next/link"
-import { Droplets } from "lucide-react"
+import Link from "next/link";
+import { Droplets } from "lucide-react";
 
-import { footerLinks, socialLinks, siteConfig } from "@/lib/site-data"
+import { footerLinks, socialLinks, siteConfig } from "@/lib/site-data";
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -11,7 +12,7 @@ export function Footer() {
           {/* Logo - данные из siteConfig */}
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center w-6 h-6 rounded-full bg-[#1e88e5]">
-              <Droplets className="w-3 h-3 text-white" />
+              <Image src={"/icon.svg"} alt="Logo" width={32} height={32} />
             </div>
             <span className="text-sm font-semibold text-white">
               {siteConfig.name.toUpperCase()} © {siteConfig.year}
@@ -21,7 +22,11 @@ export function Footer() {
           {/* Links - данные из footerLinks */}
           <nav className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-[#94a3b8]">
             {footerLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-white transition-colors">
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hover:text-white transition-colors"
+              >
                 {link.label}
               </Link>
             ))}
@@ -43,5 +48,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

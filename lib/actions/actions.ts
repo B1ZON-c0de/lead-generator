@@ -1,7 +1,11 @@
 "use server";
 
 import { ContactFormData } from "../types";
+import { sendMessageTg } from "../uttils/send-message-tg";
 
 export async function submitContactForm(formData: ContactFormData) {
-  console.log("Form submitted:", formData);
+  const TG_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
+  const TG_CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
+
+  await sendMessageTg(TG_TOKEN, TG_CHAT_ID, formData);
 }

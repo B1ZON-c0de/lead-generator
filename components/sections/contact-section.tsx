@@ -99,7 +99,7 @@ export function ContactSection({
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#1e88e5]/10 rounded-full blur-3xl" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Content */}
             <div
               className={`space-y-8 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"}`}
@@ -162,7 +162,6 @@ export function ContactSection({
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
                       }
-                      required
                       className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                     />
                   </div>
@@ -177,7 +176,6 @@ export function ContactSection({
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      required
                       className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                     />
                   </div>
@@ -193,7 +191,6 @@ export function ContactSection({
                     onChange={(e) =>
                       setFormData({ ...formData, vehicleModel: e.target.value })
                     }
-                    required
                     className="bg-[#020617]/80 border-[#1e293b] text-white placeholder:text-[#475569] focus:border-[#1e88e5] h-12 rounded-xl transition-all duration-300 focus:shadow-lg focus:shadow-[#1e88e5]/10"
                   />
                 </div>
@@ -223,8 +220,8 @@ export function ContactSection({
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide">
-                    Сообщение (опционально)
+                  <label className="text-sm font-medium text-[#94a3b8] uppercase tracking-wide ">
+                    Сообщение
                   </label>
                   <Textarea
                     placeholder="Расскажите о специфических пожеланиях..."

@@ -26,7 +26,7 @@ import type {
 
 // --- КОНФИГУРАЦИЯ САЙТА ---
 export const siteConfig: SiteConfig = {
-  name: "Elite Car Wash",
+  name: "Cult Detailing",
   description: "Премиум детейлинг студия для люксовых автомобилей",
   logoText: "CULT",
   logoHighlight: "DETAILING",
