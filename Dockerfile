@@ -1,35 +1,33 @@
-# Используем Node.js 20 (легкая версия Alpine)
-FROM node:20-alpine
-
-# Включаем pnpm (так как он используется в проекте)
+FROM node:20-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-# Создаем рабочую папку
+# Этап 1: Установка зависимостей
+FROM base AS deps
 WORKDIR /app
-
-# Копируем файлы зависимостей
 COPY package.json pnpm-lock.yaml ./
-
-# Устанавливаем зависимости
 RUN pnpm install --frozen-lockfile
 
-# Копируем весь исходный код проекта
+# Этап 2: Сборка
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Отключаем телеметрию Next.js
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Собираем проект (создается папка .next)
 RUN pnpm run build
 
-# Открываем порт 3000
-EXPOSE 3000
-
-# Переменная порта (важно для некоторых хостингов)
+# Этап 3: Запуск (Runner)
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-# Запускаем проект обычной командой start
-CMD ["pnpm", "start"]
+# Копируем только нужное из режима standalone
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+CMD ["node", "server.js"]
