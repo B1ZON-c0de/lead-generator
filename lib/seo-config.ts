@@ -1,11 +1,11 @@
 export const seoConfig = {
   // --- БАЗОВАЯ ИНФОРМАЦИЯ ---
   siteName: "Elite Car Wash",
-  siteUrl: "https://elite-carwash.ru", // TODO: Замените на ваш домен
+  siteUrl: "https://cult-detailing.site/", // TODO: Замените на ваш домен
 
   // --- META ТЕГИ ---
   title: {
-    default: "Elite Car Wash — Премиум Детейлинг Студия в Москве",
+    default: "Elite Car Wash — Премиум Детейлинг Студия в Новосибирске",
     template: "%s | Elite Car Wash", // Шаблон для страниц: "Услуги | Elite Car Wash"
   },
   description:
